@@ -1,0 +1,9 @@
+# dsh-profile-switch bundle patch: mounts the plugin into the profile's
+# assembly tree under the stable plugin id `dsh-profile-switch`. At startup
+# it registers the `/profile-switch` and `/profile-cfg` commands into the
+# host command registry (both surfaces) and asks every interactive question
+# through the host's native user-questions seam.
+
+- insert:
+    - id: dsh-profile-switch
+      name: '@aiwayds/dsh-profile-switch'
