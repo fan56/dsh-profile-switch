@@ -35,7 +35,8 @@
     "check": "tsc --noEmit -p tsconfig.json",
     "link-closure": "node scripts/link-dsh-closure.mjs",
     "smoke": "node scripts/smoke-boot.mjs",
-    "test": "npm run build && node --test test/*.test.mjs"
+    "test": "npm run build && node --test test/*.test.mjs",
+    "contract": "node scripts/contract-check.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/dsh-agent": ">=0.1.5-rc.2",

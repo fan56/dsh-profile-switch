@@ -179,7 +179,17 @@ on the next boot. Your data is intentionally preserved:
 pnpm install
 pnpm build && pnpm check && pnpm test   # unit suite (builds first)
 node scripts/smoke-boot.mjs             # real-host boot gate (needs global dsh)
+pnpm contract                           # write↔read handshake with the registry
+                                        # (auto-skips where no registry resolves)
 ```
+
+The contract check proves the deployed three-repo shape on real files: the
+plugin's store write (pin + per-agent overrides) composed back through the
+registry's `composeAgentRuntime` — override wins, explicit-inherit and
+baseline fallback hold, and the probe leg confirms `registryDetected()`
+resolves through the profile's sibling node_modules exactly as it does in a
+live deployment. On machines/profiles without the registry it degrades to a
+documented skip, so it can run anywhere.
 
 `scripts/link-dsh-closure.mjs` re-points `node_modules/@deepseek-ai/*` at
 the global dsh CLI's own closure so typecheck and tests see exactly one
