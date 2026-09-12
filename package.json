@@ -1,7 +1,7 @@
 {
   "name": "@aiwayds/dsh-profile-switch",
   "version": "0.1.1",
-  "description": "dsh plugin: switch named model profiles (default model, think level, per-subagent models) interactively via the host ask-user flow \u2014 one implementation for the TUI and web surfaces, a clean fast-fail on headless",
+  "description": "dsh plugin: switch named model profiles (default model, think level, per-subagent models) interactively via the host ask-user flow — one implementation for the TUI and web surfaces, a clean fast-fail on headless",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,7 +36,8 @@
     "link-closure": "node scripts/link-dsh-closure.mjs",
     "smoke": "node scripts/smoke-boot.mjs",
     "test": "npm run build && node --test test/*.test.mjs",
-    "contract": "node scripts/contract-check.mjs"
+    "contract": "node scripts/contract-check.mjs",
+    "postinstall": "node scripts/link-dsh-closure.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/dsh-agent": ">=0.1.5-rc.2",
