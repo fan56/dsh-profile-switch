@@ -40,6 +40,23 @@ export const name = 'dsh-profile-switch'
  */
 export const inject = ['commands', 'userQuestions']
 
+/**
+ * Root-scope idempotence marker. dsh-tui-pi mounts this plugin itself (its
+ * bundle patch inserts it, so an upgrade reactivates the commands with zero
+ * user action), and a profile may ALSO list it in `bundles` — two tree
+ * entries, one plugin. The second apply would register the same command
+ * names and crash the whole boot (`command "profile-switch" is already
+ * registered`), so the first apply claims the root and every later one
+ * no-ops. The check+claim runs synchronously at apply entry, before any
+ * await, so parallel loader fibers cannot interleave between them.
+ */
+const MOUNTED_KEY = 'dsh-profile-switch:mounted'
+
+export { MOUNTED_KEY }
+
 export function apply(ctx: Context): void {
+  const root = ctx.root ?? ctx
+  if (root.get(MOUNTED_KEY) === true) return
+  root.provide(MOUNTED_KEY, true)
   registerProfileCommands(ctx)
 }

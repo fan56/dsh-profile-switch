@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Releases are tag-driven: a `v*` git tag is the only path to npm.
 
+## [0.1.1] - 2026-09-12
+
+### Fixed
+- **`apply()` is now idempotent across mounts.** dsh-tui-pi's bundle patch
+  mounts this plugin automatically (so an upgrade reactivates the commands
+  with zero user action), and a profile may also list it in `bundles` — two
+  tree entries, one plugin. The second apply used to register the same
+  command names and crash the whole boot (`command "profile-switch" is
+  already registered`). The first apply now claims a root-scope marker
+  synchronously at apply entry; every later mount no-ops. Guarded by unit
+  tests and exercised in both mount shapes on a real host.
+
 ## [Unreleased]
 
 ### Added
