@@ -1,6 +1,6 @@
 {
   "name": "@aiwayds/dsh-profile-switch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "dsh plugin: switch named model profiles (default model, think level, per-subagent models) interactively via the host ask-user flow — one implementation for the TUI and web surfaces, a clean fast-fail on headless",
   "type": "module",
   "main": "lib/index.js",

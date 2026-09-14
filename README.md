@@ -158,7 +158,17 @@ TUI-only panels). Pairing:
 - with an older/newer tui-pi without the bridge: everything else works; the
   live leg degrades to "next session in this tree" and the summary says so;
 - the per-agent editing entry in tui-pi's `/agents` manager writes the same
-  store with the same schema — both editors coexist.
+  store with the same schema — both editors coexist;
+- **dsh-tui-pi ≥ 2.18.1 recommended on the TUI.** tui-pi 2.16.0–2.18.0
+  dropped these command names from its never-aborting dispatch list while
+  moving the panels here, so a `/profile-cfg` session longer than 90s echoed
+  a spurious `aborted due to timeout` (the panel itself kept working;
+  2.18.1 restored the dispatch). On web/headless surfaces no such guard
+  exists and any plugin version pairs with anything.
+
+No manual profile wiring is expected anywhere: `dsh plugin add` reconciles
+the bundle entry, the bundle patch mounts the plugin, and the commands
+register on every surface the profile boots.
 
 ## Uninstall
 

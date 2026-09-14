@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Releases are tag-driven: a `v*` git tag is the only path to npm.
 
+## [0.1.2] - 2026-09-14
+
+### Changed
+- **Docs: TUI pairing floor.** Recommend dsh-tui-pi ≥ 2.18.1 when pairing on
+  the TUI: tui-pi 2.16.0–2.18.0 dropped these command names from its
+  never-aborting dispatch list while moving the panels here, so a
+  `/profile-cfg` session longer than 90s echoed a spurious
+  `aborted due to timeout` (the panel kept working; tui-pi 2.18.1 fixed the
+  dispatch). Web/headless surfaces have no such guard. Also states plainly
+  that no manual profile wiring is expected: `dsh plugin add` reconciles the
+  bundle entry and the commands register on every surface.
+
 ## [0.1.1] - 2026-09-12
 
 ### Fixed
