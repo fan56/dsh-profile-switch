@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Releases are tag-driven: a `v*` git tag is the only path to npm.
 
+## [Unreleased]
+
+### Changed
+
+- **Aligned with the dsh 0.1.7-rc.1 wave.** The peer-dependency floor is
+  raised to `>=0.1.7-rc.1` (dsh-agent / dsh-commands / dsh-llm /
+  dsh-user-questions) and the devDependencies are pinned to `0.1.7-rc.1`
+  with `@deepseek-ai/cordis` at `^4.0.4`. No code changes were required:
+  the flows' narrow structural types (`ModelSelection`,
+  `ReasoningEffortId`, the ask-user envelopes) compile unchanged against
+  0.1.7-rc.1.
+- **Plugin Manager metadata.** Ships `locale/en.json` / `locale/zh.json`
+  (localized title + description) and an `icon.svg` declared in
+  `package.json`, per the 0.1.7 plugin-metadata convention.
+- **No settings migration needed:** the plugin never registered a
+  `settings.yaml` namespace under 0.1.5 — its data has always lived in the
+  plugin-owned `model-profiles.json` store and the `.dsh-profile` pins, so
+  the 0.1.7 settings rework (declarative `static Config` projection) leaves
+  nothing to carry over, and the stable entry id `dsh-profile-switch` keeps
+  any hypothetical hand-written section importable by name.
+
 ## [0.1.2] - 2026-09-14
 
 ### Changed
@@ -30,7 +51,7 @@ Releases are tag-driven: a `v*` git tag is the only path to npm.
   synchronously at apply entry; every later mount no-ops. Guarded by unit
   tests and exercised in both mount shapes on a real host.
 
-## [Unreleased]
+## [0.1.0] - 2026-09-12
 
 ### Added
 
@@ -53,22 +74,3 @@ Releases are tag-driven: a `v*` git tag is the only path to npm.
 - Headless / no-answerer fallback: an interactive command on a surface with
   no ask-user answerer fails fast with guidance pointing at the
   non-interactive files instead of hanging.
-
-### Changed
-
-- **Aligned with the dsh 0.1.7-rc.1 wave.** The peer-dependency floor is
-  raised to `>=0.1.7-rc.1` (dsh-agent / dsh-commands / dsh-llm /
-  dsh-user-questions) and the devDependencies are pinned to `0.1.7-rc.1`
-  with `@deepseek-ai/cordis` at `^4.0.4`. No code changes were required:
-  the flows' narrow structural types (`ModelSelection`,
-  `ReasoningEffortId`, the ask-user envelopes) compile unchanged against
-  0.1.7-rc.1.
-- **Plugin Manager metadata.** Ships `locale/en.json` / `locale/zh.json`
-  (localized title + description) and an `icon.svg` declared in
-  `package.json`, per the 0.1.7 plugin-metadata convention.
-- **No settings migration needed:** the plugin never registered a
-  `settings.yaml` namespace under 0.1.5 — its data has always lived in the
-  plugin-owned `model-profiles.json` store and the `.dsh-profile` pins, so
-  the 0.1.7 settings rework (declarative `static Config` projection) leaves
-  nothing to carry over, and the stable entry id `dsh-profile-switch` keeps
-  any hypothetical hand-written section importable by name.
