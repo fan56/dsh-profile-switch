@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Model Profiles",
+    "description": "Named model profiles (default model, think level, per-subagent models) switched interactively per workspace."
+  }
+}

@@ -26,8 +26,18 @@ of a `/model` + per-agent tour.
 dsh plugin --profile <your-profile> add @aiwayds/dsh-profile-switch
 ```
 
+Requires dsh ≥ **0.1.7-rc.1** (the peer-dependency floor). The plugin ships
+localized Plugin-Manager metadata (`locale/en.json` / `locale/zh.json`) and
+an `icon.svg`, so it renders with a proper title, description and icon in
+the host's Plugin Manager.
+
 The plugin mounts with `inject: ['commands', 'userQuestions']` — both are
 dsh-base services, so it coexists with any surface and any plugin stack.
+
+**Settings-free by design:** since dsh 0.1.7 a plugin's `static Config` is
+its settings-page registration, and this plugin declares none — its data is
+the wizard-edited store and tree pins below, managed through the commands,
+not form fields. Nothing to carry over from a pre-0.1.7 `settings.yaml`.
 
 ## Commands
 

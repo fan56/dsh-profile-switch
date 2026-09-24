@@ -17,6 +17,16 @@
  * configuration. The README spells this out; keep the distinction in mind
  * when reading the code.
  *
+ * Settings posture (dsh 0.1.7's declarative-config regime, where a plugin's
+ * `static Config` IS its settings-page registration): this plugin declares
+ * NONE, deliberately. Its data is the wizard-edited `model-profiles.json`
+ * store plus the per-tree `.dsh-profile` pins — structured documents written
+ * through the ask flows, not form fields, and per the settings-migration
+ * guidance such state belongs OUT of the settings surface. With no Config
+ * there is no legacy `settings.yaml` section to carry over, and the stable
+ * entry id (`dsh-profile-switch`, the bundle patch) keeps any hypothetical
+ * hand-written section importable by name.
+ *
  * Commands (host registry, both surfaces):
  * - `/profile-switch` — bind this tree to a profile: live default-model
  *   switch when a channel exists (tui-pi's selection bridge on the TUI, the

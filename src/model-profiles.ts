@@ -17,7 +17,8 @@
  * wrong-version file degrades to the seeded default document (work /
  * personal / other, empty until configured). Writes are atomic (tmp
  * sibling + rename) and whole-document last-write-wins — the accepted loss
- * model for a human-paced UI feature (same as settings.yaml).
+ * model for a human-paced UI feature (the same write-wins posture the
+ * host's per-profile settings patch applies to its volatile fields).
  *
  * Snapshot semantics — the part to keep straight:
  * - `profile.agents[name]` records compose-time overrides: a non-empty
@@ -286,10 +287,10 @@ export function formatProfileRoute(route: ProfileModelRoute | undefined, fallbac
 // nearest one found walking UP from the process cwd wins, so a subdirectory
 // (or a linked worktree) may drop its own file to override a parent's. New
 // sessions then assemble their initial model selection from that profile
-// instead of the global agent-default-model — per-tree isolation without
-// touching settings.yaml. The file is plain text: blank lines and `#`
-// comments are skipped; the first remaining line, trimmed, is the profile
-// name.
+// instead of the global agent-default-model setting — per-tree isolation
+// without touching the host's own configuration. The file is plain text:
+// blank lines and `#` comments are skipped; the first remaining line,
+// trimmed, is the profile name.
 
 /** The workspace pin file name (`.nvmrc` convention). */
 export const PROFILE_PIN_FILE = '.dsh-profile'

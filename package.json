@@ -5,6 +5,7 @@
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "icon": "./icon.svg",
   "license": "MIT",
   "keywords": [
     "dsh",
@@ -28,7 +29,9 @@
     "lib",
     "cordis.patch.yml",
     "src",
-    "docs"
+    "docs",
+    "icon.svg",
+    "locale/*.json"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -40,10 +43,10 @@
     "postinstall": "node scripts/link-dsh-closure.mjs"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-agent": ">=0.1.5-rc.2",
-    "@deepseek-ai/dsh-commands": ">=0.1.5-rc.2",
-    "@deepseek-ai/dsh-llm": ">=0.1.5-rc.2",
-    "@deepseek-ai/dsh-user-questions": ">=0.1.5-rc.2"
+    "@deepseek-ai/dsh-agent": ">=0.1.7-rc.1",
+    "@deepseek-ai/dsh-commands": ">=0.1.7-rc.1",
+    "@deepseek-ai/dsh-llm": ">=0.1.7-rc.1",
+    "@deepseek-ai/dsh-user-questions": ">=0.1.7-rc.1"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-agent": {
@@ -60,11 +63,11 @@
     }
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.2",
-    "@deepseek-ai/dsh-agent": "0.1.5-rc.2",
-    "@deepseek-ai/dsh-commands": "0.1.5-rc.2",
-    "@deepseek-ai/dsh-llm": "0.1.5-rc.2",
-    "@deepseek-ai/dsh-user-questions": "0.1.5-rc.2",
+    "@deepseek-ai/cordis": "^4.0.4",
+    "@deepseek-ai/dsh-agent": "0.1.7-rc.1",
+    "@deepseek-ai/dsh-commands": "0.1.7-rc.1",
+    "@deepseek-ai/dsh-llm": "0.1.7-rc.1",
+    "@deepseek-ai/dsh-user-questions": "0.1.7-rc.1",
     "@types/node": "^24.0.0",
     "typescript": "^5.9.0"
   },
