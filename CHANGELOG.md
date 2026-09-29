@@ -10,6 +10,12 @@ Releases are tag-driven: a `v*` git tag is the only path to npm.
 
 ### Changed
 
+- **Raise dsh host floor to 0.2.0-rc.2.** The peer-dependency floor is
+  raised to `>=0.2.0-rc.2` (dsh-agent / dsh-commands / dsh-llm /
+  dsh-user-questions) and the devDependencies are pinned to `0.2.0-rc.2`,
+  lockfile re-resolved against registry.npmjs.org; `@deepseek-ai/cordis`
+  stays at `^4.0.4`. Zero source changes — 0.2.0 is a digestion wave with
+  no compile-level breaks (tests 66 pass / 0 fail).
 - **Aligned with the dsh 0.1.7-rc.1 wave.** The peer-dependency floor is
   raised to `>=0.1.7-rc.1` (dsh-agent / dsh-commands / dsh-llm /
   dsh-user-questions) and the devDependencies are pinned to `0.1.7-rc.1`

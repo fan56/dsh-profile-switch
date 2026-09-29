@@ -26,7 +26,7 @@ of a `/model` + per-agent tour.
 dsh plugin --profile <your-profile> add @aiwayds/dsh-profile-switch
 ```
 
-Requires dsh ≥ **0.1.7-rc.1** (the peer-dependency floor). The plugin ships
+Requires dsh ≥ **0.2.0-rc.2** (the peer-dependency floor). The plugin ships
 localized Plugin-Manager metadata (`locale/en.json` / `locale/zh.json`) and
 an `icon.svg`, so it renders with a proper title, description and icon in
 the host's Plugin Manager.
