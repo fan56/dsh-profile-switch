@@ -8,6 +8,10 @@ Releases are tag-driven: a `v*` git tag is the only path to npm.
 
 ## [Unreleased]
 
+### Fixed
+- **The published tarball is npm-installable** — `postinstall` runs `node scripts/link-dsh-closure.mjs`, but the `files` allow-list never shipped `scripts/`, so every non-link install (plugin manager, plain `npm install`) died in the lifecycle step with `MODULE_NOT_FOUND` — the same defect class as fan56/dsh-subagent-registry#2. `scripts/` now ships, and the linker's stand-down guard swapped the fragile marker check for `tsconfig.json` + `.git`. `test/packaged-install.test.mjs` packs, installs the tarball under npm with lifecycle scripts on, and asserts the linker stood down; the boot smoke installs via npm for the same reason and asserts the stand-down against the real host.
+
+
 ### Changed
 
 - **Raise dsh host floor to 0.2.0-rc.2.** The peer-dependency floor is
