@@ -14,6 +14,7 @@ Releases are tag-driven: a `v*` git tag is the only path to npm.
 
 ### Changed
 
+- **0.2.1-rc.2 wave**: devDeps `@deepseek-ai/*` pins `0.2.0-rc.2` → `0.2.1-rc.2` (pnpm lockfile advanced; peer floors unchanged — pre-flight `includePrerelease` already matches 0.2.1-rc.2), CI closure tower restored to newest-of(latest,next) with a prerelease-aware compare in both the test and smoke jobs (10-17 pin undone); verified against a 0.2.1-rc.2 closure: typecheck clean, 67/0 tests, contract-check pass, boot smoke pass.
 - **Raise dsh host floor to 0.2.0-rc.2.** The peer-dependency floor is
   raised to `>=0.2.0-rc.2` (dsh-agent / dsh-commands / dsh-llm /
   dsh-user-questions) and the devDependencies are pinned to `0.2.0-rc.2`,
