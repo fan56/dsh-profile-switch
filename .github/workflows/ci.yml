@@ -1,5 +1,5 @@
 # CI: build, typecheck, unit suite on Node 22/24, plus a real-host boot smoke
-# — on every push to main, every pull request, and a daily schedule.
+# — on every push to main and every pull request.
 #
 # The @deepseek-ai/* devDeps are pinned exactly to 0.1.5-rc.2 so installs
 # resolve a real published surface, but typecheck/tests run against the GLOBAL
@@ -8,19 +8,12 @@
 # the rolling rc/stable line the same way the running host does. The smoke job
 # boots a scratch profile with the plugin mounted via the real dsh CLI
 # (scripts/smoke-boot.mjs) so "loads under real cordis" is a gate, not a hope.
-#
-# The daily schedule is the rolling early-warning: an rc/stable-line drift
-# that breaks this plugin turns the scheduled run red without anyone
-# re-pinning.
 name: CI
 
 on:
   push:
     branches: [main]
   pull_request:
-  schedule:
-    # Daily 02:37 UTC — catches upstream dsh rc/stable drift without hand-chasing.
-    - cron: '37 2 * * *'
 
 permissions:
   contents: read
