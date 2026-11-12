@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Releases are tag-driven: a `v*` git tag is the only path to npm.
 
+## [Unreleased]
+
+### Changed
+- **Rides the dsh 0.2.2-rc.2 dev closure; peer floors stay `>= 0.2.0-rc.2`.** The devDependency pins (`dsh-agent`, `dsh-commands`, `dsh-llm`, `dsh-user-questions`) re-pin `0.2.2-rc.1` → `0.2.2-rc.2` exactly (the wave is complete on npm); `@deepseek-ai/cordis` stays `^4.1.0` — the rc.2 closure ships the same `~4.1.0` line, so the range already resolves onto the closure version. The `>= 0.2.0-rc.2` peer floors are intentionally unchanged: no 0.2.2-only API is used and the host preflight satisfies ranges with `includePrerelease`, so the floor already matches the new rc. ci.yml already resolves the host newest-of(latest/next) at runtime with the prerelease-aware node comparator in both jobs; release.yml has no host install step at all — its `npm view` calls only verify the just-published version of this package — so no workflow change this wave. Mechanical dependency ride, no source changes. Re-verified against the 0.2.2-rc.2 scratch closure: typecheck clean, 67 tests pass / 0 fail; real-host boot smoke PASS (composed, 25s boot window survived, removal restored the stock tree).
+
 ## [0.4.0] - 2026-11-06
 
 ### Changed
