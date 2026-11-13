@@ -7,8 +7,8 @@
 // install hook at all (pnpm 11 gates those), which is asserted below.
 // Run: node test/packaged-install.test.mjs  (after `npm run build`)
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { execFileSync, spawnSync } from 'node:child_process'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
@@ -21,17 +21,20 @@ if (!existsSync(join(repoRoot, 'lib', 'index.js'))) {
 
 const scratch = mkdtempSync(join(tmpdir(), 'registry-packaged-install-'))
 try {
-  // 1. Pack from the repo the way CI's release job does. --ignore-scripts
-  //    keeps the root `prepare` hook from writing to stdout and corrupting
-  //    the --json output (the build gate already produced lib/). npm 10 still
-  //    runs `prepare` for `npm pack` despite that flag, so slice at the JSON
-  //    array opener and parse the remainder either way.
-  const output = execFileSync('npm', ['pack', '--json', '--pack-destination', scratch, '--ignore-scripts'], {
+  // 1. Pack from the repo the way CI's release job does. The tarball name is
+  //    read off the filesystem, never from stdout: npm still runs the root
+  //    `prepare` hook during `npm pack` even with --ignore-scripts, so its
+  //    log line corrupts `--json` output (npm 10) and parsing stdout is a
+  //    losing move. A dedicated destination directory keeps the result
+  //    unambiguous on every npm version.
+  const pack = spawnSync('npm', ['pack', '--pack-destination', scratch, '--ignore-scripts'], {
     cwd: repoRoot,
     encoding: 'utf8',
   })
-  const packed = JSON.parse(output.slice(output.search(/^\[$/m)))[0]
-  const tarball = join(scratch, packed.filename)
+  assert.equal(pack.status, 0, `npm pack failed:\n${pack.stdout}\n${pack.stderr}`)
+  const tarballs = readdirSync(scratch).filter((f) => f.endsWith('.tgz'))
+  assert.equal(tarballs.length, 1, `pack emitted exactly one tarball, got ${tarballs.join(', ') || 'none'}`)
+  const tarball = join(scratch, tarballs[0])
 
   // 2. Tarball contents: the install-hook target ships; the guard markers do
   //    not; and the manifest carries no install hook at all (#10).
