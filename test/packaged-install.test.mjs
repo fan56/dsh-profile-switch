@@ -23,13 +23,14 @@ const scratch = mkdtempSync(join(tmpdir(), 'registry-packaged-install-'))
 try {
   // 1. Pack from the repo the way CI's release job does. --ignore-scripts
   //    keeps the root `prepare` hook from writing to stdout and corrupting
-  //    the --json output (the build gate already produced lib/).
-  const packed = JSON.parse(
-    execFileSync('npm', ['pack', '--json', '--pack-destination', scratch, '--ignore-scripts'], {
-      cwd: repoRoot,
-      encoding: 'utf8',
-    }),
-  )[0]
+  //    the --json output (the build gate already produced lib/). npm 10 still
+  //    runs `prepare` for `npm pack` despite that flag, so slice at the JSON
+  //    array opener and parse the remainder either way.
+  const output = execFileSync('npm', ['pack', '--json', '--pack-destination', scratch, '--ignore-scripts'], {
+    cwd: repoRoot,
+    encoding: 'utf8',
+  })
+  const packed = JSON.parse(output.slice(output.search(/^\[$/m)))[0]
   const tarball = join(scratch, packed.filename)
 
   // 2. Tarball contents: the install-hook target ships; the guard markers do
